@@ -1,10 +1,10 @@
 #!/bin/bash -eu
 
 # Activate the virtual environment
-source /venv/bin/activate
+source /pymc-env/bin/activate
 
-# Install the project
-pip install .
+# Install the project dependencies
+pip install pymc3 numpy scipy matplotlib pandas
 
 # Build fuzzers into $OUT
 for fuzzer in $(find $SRC -name '*_fuzzer.py'); do

@@ -1,25 +1,33 @@
 import atheris
 import sys
 import pymc as pm
+import numpy as np
 
 def TestOneInput(data):
     fdp = atheris.FuzzedDataProvider(data)
-    
     try:
         with pm.Model() as model:
-            mean = fdp.ConsumeFloat()
-            sd = fdp.ConsumeFloat()
-            observed_data = fdp.ConsumeIntList(10)
+            # Define priors
+            mu = pm.Normal("mu", mu=fdp.ConsumeFloatInRange(-10, 10), sigma=1)
+            sigma = pm.HalfNormal("sigma", sigma=fdp.ConsumeFloatInRange(0.1, 10))
             
-            # Define a simple model
-            normal_dist = pm.Normal('normal_dist', mu=mean, sigma=sd, observed=observed_data)
+            # Define likelihood
+            obs = pm.Normal("obs", mu=mu, sigma=sigma, observed=np.random.randn(100))
             
-            # Attempt to sample
-            pm.sample(draws=10, tune=10)
-    
+            # Sample from the model
+            trace = pm.sample(10, tune=10)
+    except (ValueError, pm.exceptions.SamplingError) as e:
+        # Handle specific PyMC sampling errors or value errors
+        print(f"Error occurred: {e}")
+        return
     except Exception as e:
-        if not isinstance(e, (ValueError, TypeError)):
-            raise
+        # Handle other unexpected exceptions
+        print(f"Unexpected error occurred: {e}")
+        raise
 
-atheris.Setup(sys.argv, TestOneInput)
-atheris.Fuzz()
+def main():
+    atheris.Setup(sys.argv, TestOneInput)
+    atheris.Fuzz()
+
+if __name__ == "__main__":
+    main()
