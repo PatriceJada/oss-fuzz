@@ -2,6 +2,8 @@ homepage: 'http://jupyter.org'
 language: python
 primary_contact: 'jupyter@googlegroups.com'
 auto_ccs:
+fuzzing_engines:
+  - libfuzzer
 sanitizers:
   - address
   - memory:
