@@ -2,6 +2,8 @@ homepage: 'https://github.com/python-lsp/python-lsp-server'
 language: python
 primary_contact: "ccordoba12@gmail.com"
 auto_ccs:
+fuzzing_engines:
+  - libfuzzer
 sanitizers:
   - address
   - memory:
