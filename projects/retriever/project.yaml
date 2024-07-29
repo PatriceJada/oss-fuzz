@@ -2,6 +2,8 @@ homepage: "https://retriever.readthedocs.io/en/latest/"
 language: python
 primary_contact: "henrykironde@gmail.com"
 auto_ccs:
+fuzzing_engines:
+  - libfuzzer
 sanitizers:
   - address
   - memory:
