@@ -2,6 +2,8 @@ homepage: 'https://github.com/spyder-ide/qtpy'
 language: python
 primary_contact: "spyder.python@gmail.com"
 auto_ccs:
+fuzz_target:
+  - libfuzzer
 sanitizers:
   - address
   - memory:
