@@ -2,6 +2,8 @@ homepage: "https://www.spyder-ide.org"
 language: python
 primary_contact: "spyder.python@gmail.com"
 auto_ccs:
+fuzzing_engines:
+  - libfuzzer
 sanitizers:
   - address
   - memory:
