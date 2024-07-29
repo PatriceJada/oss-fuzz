@@ -1,10 +1,11 @@
-homepage: 'https://pybamm.org'
+homepage: "https://pybamm.org"
+main_repo: "https://github.com/pybamm-team/PyBaMM"
 language: python
 primary_contact: "pybamm@pybamm.org"
 auto_ccs:
+  - "pybamm@pybamm.org"
+fuzzing_engines:
+  - libfuzzer
 sanitizers:
   - address
-  - memory:
-     experimental: True
   - undefined
-main_repo: 'https://github.com/pybamm-team/PyBaMM'
